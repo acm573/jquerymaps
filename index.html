@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JQuery Mobile</title>
+<meta name="viewport" content="width=device-width, user-scalable=no"/>
+<link href="jqm/jquery.mobile-1.4.0.css" rel="stylesheet">
+<script src="jquery.js"></script>
+<script src="jqm/jquery.mobile-1.4.0.js"></script>
+<link rel="stylesheet" href="jqwidgets/styles/jqx.base.css" type="text/css" />
+<script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxchart.js"></script>
+<script type="text/javascript" src="jqwidgets/jqxdata.js"></script>
+
+</head>
+
+<script>
+ $(document).ready(function () {
+            console.log("hola");
+            // prepare chart data
+            var sampleData = [
+                { Country: 'China', Population: 1347350000, Percent: 19.18},
+                { Country: 'India', Population: 1210193422, Percent: 17.22},
+                { Country: 'USA', Population: 313912000, Percent: 4.47},
+                { Country: 'Indonesia', Population: 237641326, Percent: 3.38},
+                { Country: 'Brazil', Population: 192376496, Percent: 2.74}];
+            // prepare jqxChart settings
+            var settings = {
+                title: "Grafica de ejemplo con jQuery",
+                description: "Statistics for 2011",
+                showLegend: true,
+                enableAnimations: true,
+                padding: { left: 20, top: 5, right: 20, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: sampleData,
+                categoryAxis:
+                    {
+                        dataField: 'Country',
+                        showGridLines: true,
+                        flip: false
+                    },
+                colorScheme: 'scheme01',
+                seriesGroups:
+                    [
+                        {
+                            type: 'column',
+                            orientation: 'horizontal',
+                            columnsGapPercent: 100,
+                            toolTipFormatSettings: { thousandsSeparator: ',' },
+                            valueAxis:
+                            {
+                                flip: true,
+                                unitInterval: 100000000,
+                                maxValue: 1500000000,
+                                displayValueAxis: true,
+                                description: '',
+                                formatFunction: function (value) {
+                                    return parseInt(value / 1000000);
+                                }
+                            },
+                            series: [
+                                    { dataField: 'Population', displayText: 'Population (millions)' }
+                                ]
+                        }
+                    ]
+            };
+            // setup the chart
+            $('#jqxChart').jqxChart(settings);
+        });
+
+</script>
+
+<body>
+	<div data-role="page" id="pagina1" >
+    	<div data-role="header">
+        	<h1>Pagina interna inicial</h1>
+        </div>
+    	<div data-role="content">
+        	<a href='#pagina2' data-role="button" data-theme="e" data-transition="slide">Pagina dos</a>
+            <a href='#' data-role="button" data-theme="a">Cancelar</a>
+        </div>
+        <div id='jqxChart' style="width:510px; height:400px; position: relative; left: 0px; top: 0px;">
+        </div>
+        <div data-role="footer" data-position="fixed">
+        	<h4>www.cidesi.com</h4>
+        </div>
+    </div>
+    <div data-role="page" data-theme="f" id="pagina2" data-add-back-btn="true">
+    	<div data-role="header">
+        	<h1>Segunda Pagina interna</h1>
+        </div>
+    	<div data-role="content">
+        	<a href='#' data-role="button" data-theme="e">Aceptar</a>
+            <a href='#pagina1' data-role="button" data-theme="a" data-rel="back" data-direction="reverse">Regresar</a>
+        </div>
+        <div data-role="footer">
+        	<h4>www.cidesi.com</h4>
+        </div>
+    </div>
+</body>
+</html>
